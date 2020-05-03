@@ -1,12 +1,13 @@
 import React from 'react';
 import { Text } from 'react-native-elements';
-import { View, StyleSheet} from 'react-native';
+import { View, StyleSheet, Button} from 'react-native';
 
 
-const AccountScreen = () => {
+const AccountScreen = ({navigation}) => {
     return (
         <View>
             <Text>Account</Text>
+            <Button title='Log out' onPress={()=>navigation.navigate('Signin')}/>
         </View>
     )
 }

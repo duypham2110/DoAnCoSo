@@ -10,6 +10,8 @@ import AccountScreen from './src/screens/AccountScreen';
 import NotificationScreen from './src/screens/NotificationScreen';
 import ToolScreen from './src/screens/ToolScreen';
 import ManagementScreen from './src/screens/ManagementScreen';
+import { Provider as AuthProvider } from './src/context/AuthContext';
+import { setNavigator } from './src/navigationRef';
 
 
 const switchNavigator = createSwitchNavigator({
@@ -27,12 +29,12 @@ const switchNavigator = createSwitchNavigator({
     Account: AccountScreen
   })
 });
-
-
 const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <App />
+    <AuthProvider>
+      <App ref={(navigator) => { setNavigator(navigator) }} />
+    </AuthProvider>
   )
 };
