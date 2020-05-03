@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, Input, Button } from 'react-native-elements';
 import { View, StyleSheet, Image } from 'react-native';
 import Spacer from '../components/Spacers';
-
+import { Context as AuthContext } from '../context/AuthContext';
 
 const SigninScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { state, signin } = useContext(AuthContext);
 
     return (
         <View style={styles.background}>
             <Spacer>
                 <View style={styles.image}>
                     <Image
-                        style={{alignSelf:'center'}}
+                        style={{ alignSelf: 'center' }}
                         source={require('../images/banner.png')}
                     />
                 </View>
             </Spacer>
-            <Spacer/><Spacer/>
+            <Spacer /><Spacer />
             <Spacer>
                 <Input
                     label="Tài khoản:"
@@ -38,13 +39,16 @@ const SigninScreen = ({ navigation }) => {
                     secureTextEntry
                 />
             </Spacer>
+            {state.errorMessage ?
+                <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
             <Spacer>
                 <Button
                     title='Đăng nhập'
+                    onPress={() => { signin({ email, password }) }}
                 />
             </Spacer>
-                <Button title='Sinh Viên Flow' onPress={()=>navigation.navigate('SvFlow')}/>
-                <Button title='QTV Flow' onPress={()=>navigation.navigate('SvFlow')}/>
+            <Button title='Sinh Viên Flow' onPress={() => navigation.navigate('SvFlow')} />
+            <Button title='QTV Flow' onPress={() => navigation.navigate('SvFlow')} />
         </View>
     )
 }
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
     background: {
         backgroundColor: 'white',
         flex: 1,
-        paddingTop:80
+        paddingTop: 80
     },
     errorMessage: {
         fontSize: 16,
