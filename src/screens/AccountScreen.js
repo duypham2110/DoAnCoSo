@@ -1,13 +1,18 @@
-import React from 'react';
-import { Text } from 'react-native-elements';
-import { View, StyleSheet, Button} from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Text, Button } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Context as AuthContext } from '../context/AuthContext';
 
 
-const AccountScreen = ({navigation}) => {
+const AccountScreen = ({ navigation }) => {
+
+    const { state, signout, resetpassword } = useContext(AuthContext);
+
     return (
         <View>
             <Text>Account</Text>
-            <Button title='Log out' onPress={()=>navigation.navigate('Signin')}/>
+            <Button title='Đặt lại mật khẩu' onPress={() => navigation.navigate('ResetPassword')} />
+            <Button title='Đăng xuất' onPress={signout} />
         </View>
     )
 }

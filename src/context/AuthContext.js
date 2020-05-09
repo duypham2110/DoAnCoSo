@@ -9,9 +9,12 @@ const authReducer = (state, action) => {
             return { ...state, errorMessage: action.payload };
         case 'signin':
             return { errorMessage: '', token: action.payload.token, role: action.payload.role };
-
         case 'signup':
             return { errorMessage: '', token: action.payload };
+        case 'resetpassword':
+            return { errorMessage: '', token: action.payload };
+        case 'signout':
+            return { token: null, errorMessage: '' };
         default:
             return state;
     }
@@ -32,7 +35,10 @@ const signin = dispatch => async ({ email, password }) => {
                 }
             }
         );
-        response.data.role === 'AD' ? navigate('QtvFlow') : navigate('SvFlow');
+
+        const role = response.data.role;
+
+        role === 'AD' ? navigate('QtvFlow') : navigate('SvFlow');
     } catch (err) {
         dispatch({
             type: 'add_error',
@@ -44,10 +50,10 @@ const signin = dispatch => async ({ email, password }) => {
 const signup = (dispatch) => async ({ email, password, role }) => {
     //make api request
     try {
-        const respone = await trackerApi.post('/signup', { email, password, role });
-        await AsyncStorage.setItem('token', respone.data.token);
-        await AsyncStorage.setItem('role', respone.data.role);
-        dispatch({ type: 'signup', payload: respone.data.token })
+        const response = await trackerApi.post('/signup', { email, password, role });
+        await AsyncStorage.setItem('token', response.data.token);
+        await AsyncStorage.setItem('role', response.data.role);
+        dispatch({ type: 'signup', payload: response.data.token })
 
         //navigate to main flow
         //navigate('TrackList');
@@ -57,14 +63,29 @@ const signup = (dispatch) => async ({ email, password, role }) => {
     }
 };
 
-const signout = (dispatch) => {
-    return () => {
+const resetpassword = (dispatch) => async ({ email, oldpassword, newpassword }) => {
+    try {
+        const response = await trackerApi.post('resetpassword', { email, oldpassword, newpassword })
+        dispatch({ type: 'resetpassword', payload: respone.data.msg })
+    }
+    catch (err) {
+        dispatch({
+            type: 'add_error',
+            payload: 'Something went wrong when reset password'
+        })
+    }
+}
 
+const signout = (dispatch) => {
+    return async () => {
+        await AsyncStorage.removeItem('token');
+        dispatch({ type: 'signout' });
+        navigate('loginFlow');
     };
 };
 
 export const { Provider, Context } = createDataContext(
     authReducer,
-    { signin, signout, signup },
+    { signin, signout, signup, resetpassword },
     { token: null, errorMessage: '', role: '' }
 );
