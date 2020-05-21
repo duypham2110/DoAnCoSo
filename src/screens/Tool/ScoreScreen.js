@@ -3,12 +3,12 @@ import { Text } from 'react-native-elements';
 import { View, StyleSheet} from 'react-native';
 
 
-const ToolScreen = () => {
+const ScoreScreen = () => {
     return (
         <View>
-            <Text>Tool</Text>
+            <Text>ScoreScreen</Text>
         </View>
     )
 }
 
-export default ToolScreen; 
+export default ScoreScreen; 

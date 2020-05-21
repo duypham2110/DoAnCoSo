@@ -10,15 +10,23 @@ import AddNotificationScreen from './src/screens/Notification/AddNotificationScr
 import ShowNotificationScreen from './src/screens/Notification/ShowNotificationScreen';
 import CreateNotificationScreen from './src/screens/Notification/CreateNotificationScreen';
 
-import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
-import ResetPasswordScreen from './src/screens/ResetPasswordScreen';
 
-import ToolScreen from './src/screens/ToolScreen';
+import AccountScreen from './src/screens/Account/AccountScreen';
+import ResetPasswordScreen from './src/screens/Account/ResetPasswordScreen';
+
+import ToolScreen from './src/screens/Tool/ToolScreen';
+import ProfileScreen from './src/screens/Tool/ProfileScreen';
+import ProgramScreen from './src/screens/Tool/ProgramScreen';
+import ScoreScreen from './src/screens/Tool/ScoreScreen';
+import TuitionScreen from './src/screens/Tool/TuitionScreen';
+import UpdateProfileScreen from './src/screens/Tool/UpdateProfileScreen';
 
 import ManagementScreen from './src/screens/ManagementScreen';
+
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as NotificationProvider } from './src/context/NotificationContext';
+import { Provider as ProfProvider } from './src/context/ProfContext';
 import { setNavigator } from './src/navigationRef';
 
 
@@ -27,8 +35,18 @@ const switchNavigator = createSwitchNavigator({
     Signin: SigninScreen
   }),
   SvFlow: createBottomTabNavigator({
-    Notification: NotificationScreen,
-    Tool: ToolScreen,
+    notiFlow: createStackNavigator({
+      Notification: NotificationScreen,
+      ShowNotification: ShowNotificationScreen
+    }),
+    toolFlow: createStackNavigator({
+      Tool: ToolScreen,
+      Profile: ProfileScreen,
+      Program: ProgramScreen,
+      Score: ScoreScreen,
+      Tuition: TuitionScreen,
+      UpdateProfile:UpdateProfileScreen
+    }),
     accountFlow: createStackNavigator({
       Account: AccountScreen,
       ResetPassword: ResetPasswordScreen
@@ -39,7 +57,7 @@ const switchNavigator = createSwitchNavigator({
       Notification: NotificationScreen,
       AddNotification: AddNotificationScreen,
       ShowNotification: ShowNotificationScreen,
-      CreateNotification:CreateNotificationScreen
+      CreateNotification: CreateNotificationScreen
     }),
     Management: ManagementScreen,
     accountFlow: createStackNavigator({
@@ -52,10 +70,12 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <NotificationProvider>
       <AuthProvider>
-        <App ref={(navigator) => { setNavigator(navigator) }} />
+        <NotificationProvider>
+          <ProfProvider>
+            <App ref={(navigator) => { setNavigator(navigator) }} />
+          </ProfProvider>
+        </NotificationProvider>
       </AuthProvider>
-    </NotificationProvider>
   )
 };

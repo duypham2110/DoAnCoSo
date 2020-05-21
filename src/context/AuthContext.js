@@ -8,7 +8,7 @@ const authReducer = (state, action) => {
         case 'add_error':
             return { ...state, errorMessage: action.payload };
         case 'signin':
-            return { errorMessage: '', token: action.payload.token, role: action.payload.role };
+            return { errorMessage: '', token: action.payload.token, role: action.payload.role,email:action.payload.email };
         case 'signup':
             return { errorMessage: '', token: action.payload };
         case 'resetpassword':
@@ -31,7 +31,8 @@ const signin = dispatch => async ({ email, password }) => {
                 payload:
                 {
                     token: response.data.token,
-                    role: response.data.role
+                    role: response.data.role,
+                    email: email
                 }
             }
         );
@@ -66,12 +67,16 @@ const signup = (dispatch) => async ({ email, password, role }) => {
 const resetpassword = (dispatch) => async ({ email, oldpassword, newpassword }) => {
     try {
         const response = await trackerApi.post('resetpassword', { email, oldpassword, newpassword })
-        dispatch({ type: 'resetpassword', payload: respone.data.msg })
+        navigate('Signin')
+        dispatch({
+            type: 'add_error',
+            payload: 'Đổi mật khẩu thành công! Vui lòng đăng nhập lại'
+        })
     }
     catch (err) {
         dispatch({
             type: 'add_error',
-            payload: 'Something went wrong when reset password'
+            payload: 'Đổi mật khẩu thất bại'
         })
     }
 }
@@ -87,5 +92,5 @@ const signout = (dispatch) => {
 export const { Provider, Context } = createDataContext(
     authReducer,
     { signin, signout, signup, resetpassword },
-    { token: null, errorMessage: '', role: '' }
+    { token: null, errorMessage: '', role: '' ,email:''}
 );

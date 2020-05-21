@@ -6,7 +6,7 @@ import { Context as AuthContext } from '../context/AuthContext';
 
 const SigninScreen = ({ navigation }) => {
 
-    const [email, setEmail] = useState('ad');
+    const [email, setEmail] = useState('1710156');
     const [password, setPassword] = useState('1');
     const { state, signin } = useContext(AuthContext);
 

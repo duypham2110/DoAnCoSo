@@ -3,12 +3,12 @@ import { Text } from 'react-native-elements';
 import { View, StyleSheet} from 'react-native';
 
 
-const ResetPasswordScreen = () => {
+const ProgramScreen = () => {
     return (
         <View>
-            <Text>ResetPasswordScreen</Text>
+            <Text>ProgramScreen</Text>
         </View>
     )
 }
 
-export default ResetPasswordScreen; 
+export default ProgramScreen; 
