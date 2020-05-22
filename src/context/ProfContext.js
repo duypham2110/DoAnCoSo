@@ -14,16 +14,16 @@ const profReducer = (state, action) => {
 
 const getProf = (dispatch) => {
     return async () => {
-        const response = await trackerApi.get('/profile/1710156')
-
+        const email = await AsyncStorage.getItem('email');
+        const response = await trackerApi.get(`/profile/${email}`)
         dispatch({ type: 'get_profile', payload: response.data });
         navigate('Profile');
     }
 }
 
-const postProf = (dispatch) => async ({ mssv, hovaten, malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi }) => {
+const postProf = (dispatch) => async ({ mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi }) => {
     try {
-        const response = await trackerApi.post(`/profile/${mssv}`,{ mssv, hovaten, malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi })
+        const response = await trackerApi.post(`/profile/${mssv}`, { mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi })
         navigate('Profile');
         //dispatch({ type: 'resetpassword', payload: respone.data.msg })
     }
@@ -37,6 +37,6 @@ const postProf = (dispatch) => async ({ mssv, hovaten, malop,tinhtranghoc,ngaysi
 
 export const { Provider, Context } = createDataContext(
     profReducer,
-    {getProf,postProf},
+    { getProf, postProf },
     { data: '', errorMessage: '' }
 );

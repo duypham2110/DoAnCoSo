@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Text, Input, Button } from 'react-native-elements';
 import { View, StyleSheet, Image } from 'react-native';
 import Spacer from '../components/Spacers';
 import { Context as AuthContext } from '../context/AuthContext';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SigninScreen = ({ navigation }) => {
 
@@ -22,12 +23,21 @@ const SigninScreen = ({ navigation }) => {
             </Spacer>
             <Spacer /><Spacer />
             <Spacer>
-                <Input
-                    label="Tài khoản:"
+                <Input 
+                    style={styles.inputs}
+                    label="Tên đăng nhập:"
                     value={email}
                     onChangeText={setEmail}
                     autoCapitalize='none'
                     autoCorrect={false}
+                    placeholder='Nhập tên đăng nhập'
+                    leftIcon={
+                        <Icon
+                        name='user'
+                        size={24}
+                        color='black'
+                        />
+                    }
                 />
                 <Spacer />
                 <Input
@@ -37,6 +47,14 @@ const SigninScreen = ({ navigation }) => {
                     autoCapitalize='none'
                     autoCorrect={false}
                     secureTextEntry
+                    placeholder='Nhập mật khẩu'
+                    leftIcon={
+                        <Icon
+                        name='lock'
+                        size={24}
+                        color='black'
+                        />
+                    }
                 />
             </Spacer>
             {state.errorMessage ?
@@ -46,9 +64,7 @@ const SigninScreen = ({ navigation }) => {
                     title='Đăng nhập'
                     onPress={() => { signin({ email, password }) }}
                 />
-            </Spacer>
-            <Button title='Sinh Viên Flow' onPress={() => navigation.navigate('SvFlow')} />
-            <Button title='QTV Flow' onPress={() => navigation.navigate('SvFlow')} />
+            </Spacer>       
         </View>
     )
 }
@@ -68,6 +84,11 @@ const styles = StyleSheet.create({
     errorMessage: {
         fontSize: 16,
         color: 'red'
+    },
+    inputs: {
+      borderWidth: 1,
+      borderColor: '#E3E3E3',
+      borderRadius: 21.5
     }
 });
 

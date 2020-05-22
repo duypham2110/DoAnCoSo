@@ -8,23 +8,47 @@ const authReducer = (state, action) => {
         case 'add_error':
             return { ...state, errorMessage: action.payload };
         case 'signin':
-            return { errorMessage: '', token: action.payload.token, role: action.payload.role,email:action.payload.email };
+            return { errorMessage: '', token: action.payload.token, role: action.payload.role, email: action.payload.email };
         case 'signup':
             return { errorMessage: '', token: action.payload };
         case 'resetpassword':
             return { errorMessage: '', token: action.payload };
         case 'signout':
-            return { token: null, errorMessage: '' };
+            return { token: null, email: null, role: null, errorMessage: '' };
         default:
             return state;
     }
 };
+
+const tryLocalSignin = dispatch => async () => {
+    const token = await AsyncStorage.getItem('token');
+    const role = await AsyncStorage.getItem('role');
+    const email = await AsyncStorage.getItem('email');
+    if (token && role && email) {
+        dispatch(
+            {
+                type: 'signin',
+                payload:
+                {
+                    token,
+                    role,
+                    email
+                }
+            }
+        );
+        role === 'SV' ? navigate('SvFlow') : navigate('QtvFlow');
+    }
+    else {
+        navigate('loginFlow');
+    }
+}
 
 const signin = dispatch => async ({ email, password }) => {
     try {
         const response = await trackerApi.post('/signin', { email, password });
         await AsyncStorage.setItem('token', response.data.token);
         await AsyncStorage.setItem('role', response.data.role);
+        await AsyncStorage.setItem('email', email);
         dispatch(
             {
                 type: 'signin',
@@ -36,9 +60,7 @@ const signin = dispatch => async ({ email, password }) => {
                 }
             }
         );
-
         const role = response.data.role;
-
         role === 'AD' ? navigate('QtvFlow') : navigate('SvFlow');
     } catch (err) {
         dispatch({
@@ -91,6 +113,6 @@ const signout = (dispatch) => {
 
 export const { Provider, Context } = createDataContext(
     authReducer,
-    { signin, signout, signup, resetpassword },
-    { token: null, errorMessage: '', role: '' ,email:''}
+    { signin, signout, signup, resetpassword, tryLocalSignin },
+    { token: '', errorMessage: '', role: '', email: '' }
 );

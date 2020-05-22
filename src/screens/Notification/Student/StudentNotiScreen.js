@@ -1,11 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import { View, Text,StyleSheet, FlatList  } from 'react-native'
 import { Card, ListItem, Button, Icon, Image } from 'react-native-elements'
-import { Context as NotificationContext } from '../../context/NotificationContext';
-import { Feather } from '@expo/vector-icons';
+import { Context as NotificationContext } from '../../../context/NotificationContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const NotificationScreen = ({ navigation }) => {
+const StudentNotiScreen = ({ navigation }) => {
     const { state, getNoti } = useContext(NotificationContext);
     useEffect(() => {
         getNoti();
@@ -18,37 +17,29 @@ const NotificationScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <View>            
+        <View>
             <FlatList
                 data={state}
                 keyExtractor={(state) => `item${state.id}`}
                 renderItem={({ item }) => {
-                    return <TouchableOpacity onPress={() => navigation.navigate('ShowNotification', { id: item.id })} >
+                    return <TouchableOpacity style={{paddingBottom:20}} onPress={() => navigation.navigate('StudentShowNoti', { id: item.id })} >
                         <Card
                             title={item.title}>
-                            <View style={styles.row}>
-                                <Image
-                                    source={{ uri: 'http://tuyensinh.dlu.edu.vn/Temp/ArticleImage/fadea810-5788-486c-b3d6-b4b617b7934d.jpg' }}
-                                    style={{ width: 100, height: 100 }}
-                                />
-                                <Text style={styles.content}>{item.content.length>65?item.content.substring(1, 65)+'...':item.content}</Text>
-                            </View>
+                        <View style={styles.row}>
+                            <Image
+                                source={{ uri: 'http://tuyensinh.dlu.edu.vn/Temp/ArticleImage/fadea810-5788-486c-b3d6-b4b617b7934d.jpg' }}
+                                style={{ width: 100, height: 100 }}
+                            />
+                            <Text style={styles.content}>{item.content.length>65?item.content.substring(1, 65)+'...':item.content}</Text>
+                        </View>
+
                         </Card>
                     </TouchableOpacity>
                 }}
             />
+            
         </View>
     )
-}
-
-NotificationScreen.navigationOptions = ({ navigation }) => {
-    return {
-        headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('CreateNotification')}>
-                <Feather name="plus" size={30} />
-            </TouchableOpacity> 
-        )
-    }
 }
 
 const styles = StyleSheet.create({
@@ -76,4 +67,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NotificationScreen; 
+export default StudentNotiScreen; 

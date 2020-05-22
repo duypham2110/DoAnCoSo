@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
-import { Text, Button } from 'react-native-elements';
+import { Text, Button, Input,Divider } from 'react-native-elements';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { Context as AuthContext } from '../../context/AuthContext';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Spacer from '../../components/Spacers';
 
 
 const ResetPasswordScreen = () => {
@@ -15,27 +17,61 @@ const ResetPasswordScreen = () => {
     const [confirmpassword, setConfirmpassword] = useState('');
 
     return (
-        <View>
-            
-            <View style={styles.row}>
-                    <Text style={styles.label}>Mật khẩu cũ:</Text>
-                    <TextInput style={styles.input} value={oldpassword} onChangeText={setOldpassword} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Mật khẩu mới:</Text>
-                    <TextInput style={styles.input} value={newpassword} onChangeText={setNewpassword} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Xác nhận mật khẩu:</Text>
-                    <TextInput style={styles.input} value={confirmpassword} onChangeText={setConfirmpassword} />
-                </View>
-            {msg ?
-                <Text style={styles.errorMessage}>{msg}</Text> : null}
-            {newpassword!=confirmpassword ?
-                <Text style={styles.errorMessage}>Xác nhận mật khẩu chưa chính xác</Text> : null}
-            {newpassword===''||confirmpassword===''||oldpassword==='' ?
-                <Text style={styles.errorMessage}>Vui lòng nhập đử thông tin</Text> : null}
-                <Button title="Xác nhận" onPress={()=>resetpassword({email,oldpassword,newpassword})}/>
+        <View style={styles.background}>
+            <Spacer>
+                <Input
+                    label="Mật khẩu hiện tại:"
+                    value={oldpassword}
+                    onChangeText={setOldpassword}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    secureTextEntry
+                    placeholder='Nhập mật khẩu hiện tại'
+                    leftIcon={
+                        <Icon
+                        name='lock'
+                        size={24}
+                        color='black'
+                        />
+                    }
+                />          
+                <Input
+                    label="Mật khẩu mới:"
+                    value={newpassword}
+                    onChangeText={setNewpassword}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    secureTextEntry
+                    placeholder='Nhập mật khẩu mới'
+                    leftIcon={
+                        <Icon
+                        name='unlock-alt'
+                        size={24}
+                        color='black'
+                        />
+                    }
+                />         
+                <Input
+                    label="Xác nhận mật khẩu mới:"
+                    value={confirmpassword}
+                    onChangeText={setConfirmpassword}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    secureTextEntry
+                    placeholder='Nhập lại mật khẩu mới'
+                    leftIcon={
+                        <Icon
+                        name='unlock'
+                        size={24}
+                        color='black'
+                        />
+                    }
+                />             
+            {state.errorMessage ?
+                <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
+                <Spacer />  
+            <Button title="Xác nhận" onPress={()=>resetpassword({email,oldpassword,newpassword})}/>
+            </Spacer>
         </View>
     )
 }
@@ -46,12 +82,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderWidth: 1,
         borderColor: 'black',
-        padding: 5,
+        borderRadius: 21.5,
+        padding: 10,
         margin: 5,
         flex:1,
         marginBottom: 20,
         marginRight: 20,
-        marginTop: 10
+        marginTop: 10,
+        backgroundColor:'white'
     },
     label: {
         marginBottom: 5,
@@ -62,6 +100,15 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row'
+    },
+    errorMessage: {
+        fontSize: 16,
+        color: 'red'
+    },
+    background: {
+        backgroundColor: 'white',
+        flex: 1,
+        paddingTop: 20
     }
 });
 

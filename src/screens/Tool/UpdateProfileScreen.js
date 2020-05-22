@@ -8,7 +8,7 @@ const UpdateProfileScreen = ({ navigation }) => {
     
     const {postProf } = useContext(ProfileContext);
     
-    const [state, dispatch] = useReducer(reducer,navigation.getParam('state'));
+    const state = navigation.getParam('state');
 
     const [mssv, setMssv] = useState(state.mssv);
     const [hovaten, setHovaten] = useState(state.hovaten);

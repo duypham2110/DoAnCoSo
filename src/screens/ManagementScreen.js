@@ -1,14 +1,85 @@
 import React from 'react';
-import { Text } from 'react-native-elements';
-import { View, StyleSheet} from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, TouchableOpacity } from 'react-native';
+import { Card, ListItem, Button, Icon, Image } from 'react-native-elements'
 
+const data = [
+    { 
+      key: 'Quản lý tài khoản',
+      source: require('../images/taikhoan.png')
+    }, 
+    { 
+        key: 'Quản lý\nthông tin Sinh viên',
+        source: require('../images/sinhvien.png')
+    }, 
+    { 
+        key: 'Thống kê &\nKết xuất dữ liệu',
+        source: require('../images/thongke.png')
+    }
+];
+
+const formatData = (data, numColumns) => {
+  const numberOfFullRows = Math.floor(data.length / numColumns);
+
+  let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
+  while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
+    data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
+    numberOfElementsLastRow++;
+  }
+
+  return data;
+};
+
+const numColumns = 2;
 
 const ManagementScreen = () => {
+    const renderItem = ({ item, index }) => {
+        if (item.empty === true) {
+          return <View style={[styles.item, styles.itemInvisible]} />;
+        }
+        return (
+          <TouchableOpacity
+            style={styles.item}
+          >
+            <Image
+                source={item.source}
+                style={{ width: Dimensions.get('window').width / numColumns -80, height: Dimensions.get('window').width / numColumns -80}}
+            />
+            <Text style={styles.text}>{item.key}</Text>
+          </TouchableOpacity>
+        );
+      };
+    
     return (
-        <View>
-            <Text>ManagementScreen</Text>
+        <View style={{backgroundColor:'white',flex:1}}>
+            <FlatList
+                data={formatData(data, numColumns)}
+                style={styles.container}
+                renderItem={renderItem}
+                numColumns={numColumns}
+            />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      marginVertical: 20,
+    },
+    item: {
+      alignItems: 'center',
+      flex: 1,
+      margin: 1,
+      height: Dimensions.get('window').width / numColumns, // approximate a square
+    },
+    itemInvisible: {
+      backgroundColor: 'transparent',
+    },
+    text:{
+        textAlign:'center',
+        fontSize:16,
+        fontWeight:'bold'
+    }
+});
 
 export default ManagementScreen; 

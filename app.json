@@ -1,28 +1,16 @@
 {
   "expo": {
     "name": "DoAnCoSo",
-    "slug": "DoAnCoSo",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "slug": "doancoso",
+    "sdkVersion": "37.0.0",
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.duy211099.food",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.duy211099.food",
+      "versionCode": 1
     },
     "description": ""
   }

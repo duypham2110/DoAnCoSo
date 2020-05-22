@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { Text } from 'react-native-elements';
-import { View, StyleSheet} from 'react-native';
+import { View, Text, Image,StyleSheet } from 'react-native'
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Context as NotificationContext } from '../../context/NotificationContext';
 import { EvilIcons } from '@expo/vector-icons';
+
 
 const ShowNotificationScreen = ({navigation}) => {
     const {state } = useContext(NotificationContext);
@@ -23,8 +24,9 @@ ShowNotificationScreen.navigationOptions = ({ navigation }) => {
                 navigation.navigate('Edit', { id: navigation.getParam('id') })
             }
         >
-            <EvilIcons name="pencil" size={35} />
+            <EvilIcons name="pencil" size={35} />   
         </TouchableOpacity>
+        
         )
     }
 }
