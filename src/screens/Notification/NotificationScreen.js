@@ -31,7 +31,7 @@ const NotificationScreen = ({ navigation }) => {
                                     source={{ uri: 'http://tuyensinh.dlu.edu.vn/Temp/ArticleImage/fadea810-5788-486c-b3d6-b4b617b7934d.jpg' }}
                                     style={{ width: 100, height: 100 }}
                                 />
-                                <Text style={styles.content}>{item.content.length>65?item.content.substring(1, 65)+'...':item.content}</Text>
+                                <Text style={styles.content}>{item.content.length>65?item.content.substring(0, 65)+'...':item.content}</Text>
                             </View>
                         </Card>
                     </TouchableOpacity>

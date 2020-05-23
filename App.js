@@ -35,33 +35,108 @@ import { setNavigator } from './src/navigationRef';
 
 
 const toolFlow = createStackNavigator({
-  Tool: ToolScreen,
-  Profile: ProfileScreen,
-  Program: ProgramScreen,
-  Score: ScoreScreen,
-  Tuition: TuitionScreen,
-  UpdateProfile: UpdateProfileScreen
+  Tool: {
+    screen:ToolScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Công cụ"}
+    }
+  },
+  Profile: {
+    screen:ProfileScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Thông tin cá nhân"}
+    }
+  },
+  Program: {
+    screen:ProgramScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Chương trình đào tạo"}
+    }
+  },
+  Score: {
+    screen:ScoreScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Bảng điểm"}
+    }
+  },
+  Tuition: {
+    screen:TuitionScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Học phí"}
+    }
+  },
+  UpdateProfile: {
+    screen:UpdateProfileScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Cập nhật thông tin"}
+    }
+  },
 })
 
 const studentNotiFlow = createStackNavigator({
-  StudentNoti: StudentNotiScreen,
-  StudentShowNoti: StudentShowNotiScreen
+  StudentNoti: {
+    screen:StudentNotiScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Thông báo"}
+    }
+  },
+  StudentShowNoti: {
+    screen:StudentShowNotiScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Xem thông báo"}
+    }
+  }
 })
 
 const accountFlow= createStackNavigator({
-  Account: AccountScreen,
-  ResetPassword: ResetPasswordScreen
+  Account: {
+    screen:AccountScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Tài khoản"}
+    }
+  },
+  ResetPassword: {
+    screen:ResetPasswordScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Đặt lại mật khẩu"}
+      }
+  }
 })
 
 const qtvNotiFlow= createStackNavigator({
-  Notification: NotificationScreen,
-  AddNotification: AddNotificationScreen,
-  ShowNotification: ShowNotificationScreen,
-  CreateNotification: CreateNotificationScreen
+  Notification: {
+    screen:NotificationScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Thông báo"}
+    }
+  },
+  AddNotification: {
+    screen:AddNotificationScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Thêm thông báo"}
+    }
+  },
+  ShowNotification: {
+    screen:ShowNotificationScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Xem thông báo"}
+    }
+  },
+  CreateNotification: {
+    screen:CreateNotificationScreen,
+    navigationOptions: ({navigation}) => {
+      return { title: "Tạo thông báo"}
+    }
+  }
 })
 
 const managementFlow= createStackNavigator({
-    Management: ManagementScreen
+    Management: {
+      screen:ManagementScreen,
+      navigationOptions: ({navigation}) => {
+        return { title: "Quản lý"}
+      }
+    }
 })
 
 toolFlow.navigationOptions = {
