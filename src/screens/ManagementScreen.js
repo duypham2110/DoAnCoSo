@@ -13,7 +13,8 @@ const data = [
     }, 
     { 
         key: 'Thống kê &\nKết xuất dữ liệu',
-        source: require('../images/thongke.png')
+        source: require('../images/thongke.png'),
+        navi:'Statistic'
     }
 ];
 
@@ -31,7 +32,7 @@ const formatData = (data, numColumns) => {
 
 const numColumns = 2;
 
-const ManagementScreen = () => {
+const ManagementScreen = ({navigation}) => {
     const renderItem = ({ item, index }) => {
         if (item.empty === true) {
           return <View style={[styles.item, styles.itemInvisible]} />;
@@ -39,6 +40,7 @@ const ManagementScreen = () => {
         return (
           <TouchableOpacity
             style={styles.item}
+            onPress={() => navigation.navigate(item.navi)}
           >
             <Image
                 source={item.source}

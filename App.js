@@ -27,6 +27,7 @@ import TuitionScreen from './src/screens/Tool/TuitionScreen';
 import UpdateProfileScreen from './src/screens/Tool/UpdateProfileScreen';
 
 import ManagementScreen from './src/screens/ManagementScreen';
+import StatisticScreen from './src/screens/StatisticScreen';
 
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as NotificationProvider } from './src/context/NotificationContext';
@@ -135,6 +136,12 @@ const managementFlow= createStackNavigator({
       screen:ManagementScreen,
       navigationOptions: ({navigation}) => {
         return { title: "Quản lý"}
+      }
+    },
+    Statistic: {
+      screen:StatisticScreen,
+      navigationOptions: ({navigation}) => {
+        return { title: "Thống kê"}
       }
     }
 })
