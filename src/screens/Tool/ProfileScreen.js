@@ -4,6 +4,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Context as ProfileContext } from '../../context/ProfContext';
 import Spacer from '../../components/Spacers';
+import InfomationItem from '../../components/InfomationItem';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -24,54 +25,71 @@ const ProfileScreen = ({navigation}) => {
     return (
         <View>
             <ScrollView>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>MSSV:</Text>
-                        <Text style={styles.input}>{state.mssv}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Họ tên:</Text>
-                        <Text style={styles.input}>{state.hovaten}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Lớp:</Text>
-                        <Text style={styles.input}>{state.malop}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Tình trạng:</Text>
-                        <Text style={styles.input}>{state.tinhtranghoc}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Ngày sinh:</Text>
-                        <Text style={styles.input}>{state.ngaysinh}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Nơi sinh:</Text>
-                        <Text style={styles.input}>{state.noisinh}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Dân tộc:</Text>
-                        <Text style={styles.input}>{state.dantoc}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Tôn giáo:</Text>
-                        <Text style={styles.input}>{state.tongiao}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Email:</Text>
-                        <Text style={styles.input}>{state.email}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>SĐT:</Text>
-                        <Text style={styles.input}>{state.sdt}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>CMND:</Text>
-                        <Text style={styles.input}>{state.cmnd}</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Địa chỉ:</Text>
-                        <Text style={styles.input}>{state.diachi}</Text>
-                    </View>
+                    <InfomationItem 
+                        title={'MSSV'}
+                        content={state.mssv}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Họ và tên'}
+                        content={state.hovaten}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Lớp'}
+                        content={state.malop}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Tình trạng học'}
+                        content={state.tinhtranghoc}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Ngày sinh'}
+                        content={state.ngaysinh}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Nơi sinh'}
+                        content={state.noisinh}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Dân tộc'}
+                        content={state.dantoc}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Tôn giáo'}
+                        content={state.tongiao}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Giới tính'}
+                        content={state.gioitinh}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Email'}
+                        content={state.email}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Số điện thoại'}
+                        content={state.sdt}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Số CMND'}
+                        content={state.cmnd}
+                        disabled
+                    />
+                    <InfomationItem 
+                        title={'Địa chỉ'}
+                        content={state.diachi}
+                        disabled
+                    />
                 <Spacer>
                     <Button 
                         icon={

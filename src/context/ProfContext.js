@@ -21,9 +21,9 @@ const getProf = (dispatch) => {
     }
 }
 
-const postProf = (dispatch) => async ({ mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi }) => {
+const postProf = (dispatch) => async ({ mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi,gioitinh }) => {
     try {
-        const response = await trackerApi.post(`/profile/${mssv}`, { mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi })
+        const response = await trackerApi.post(`/profile/${mssv}`, { mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi,gioitinh })
         navigate('Profile');
         //dispatch({ type: 'resetpassword', payload: respone.data.msg })
     }

@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, Button } from 'react-native-elements';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { TextInput,Divider} from 'react-native-paper';
 import { Context as ProfileContext } from '../../context/ProfContext';
+import { Dropdown } from 'react-native-material-dropdown';
+import DatePicker from 'react-native-datepicker'
 
 const UpdateProfileScreen = ({ navigation }) => {   
     
@@ -22,85 +25,167 @@ const UpdateProfileScreen = ({ navigation }) => {
     const [sdt, setSdt] = useState(state.sdt);
     const [cmnd, setCmnd] = useState(state.cmnd);
     const [diachi, setDiachi] = useState(state.diachi);
+    const [gioitinh, setGioitinh] = useState(state.gioitinh);
+
+    let gioiTinhData = [{
+        value: 'Nam',
+      }, {
+        value: 'Nữ',
+      }, {
+        value: 'Khác',
+      }];
+
+    let noiSinhData = [{
+        value: 'Lâm Đồng',
+    },{
+        value: 'An Giang',
+    }, {
+        value: 'Bà Rịa-Vũng Tàu',
+    }, {
+        value: 'Bạc Liêu',
+    }, {
+        value: 'Bắc Kạn',
+    }, {
+        value: 'Bắc Giang',
+    }, {
+        value: 'Bắc Ninh',
+    }, {
+        value: 'Bến Tre',
+    }, {
+        value: 'Bình Dương',
+    }, {
+        value: 'Bình Định',
+    }, {
+        value: 'Bình Phước',
+    }, {
+        value: 'Bình Thuận',
+    }, {
+        value: 'Cà Mau',
+    }, {
+        value: 'Cao Bằng',
+    }, {
+        value: 'Cần Thơ',
+    }, {
+        value: 'Đà Nẵng',
+    }, {
+        value: 'Đắk Lắk',
+    }, {
+        value: ' Đắk Nông',
+    }];
 
     return (
         <View>            
             <ScrollView >
-                <View style={styles.row}>
-                    <Text style={styles.label}>MSSV:</Text>
-                    <Text style={styles.input}>{mssv}</Text>
+                <TextInput        
+                    label='MSSV'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={mssv}
+                    disabled
+                />      
+                <TextInput        
+                    label='Họ và tên'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={hovaten}
+                    disabled
+                />      
+                <TextInput        
+                    label='Lớp'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={malop}
+                    disabled
+                />      
+                <TextInput        
+                    label='Tình trạng học'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={tinhtranghoc}
+                    disabled
+                />      
+                <Divider />
+                <View
+                    style={{flexDirection:'row',
+                        justifyContent:'flex-start',
+                        paddingHorizontal:8}} >
+                <View
+                    style={{
+                        paddingVertical:12,
+                        padding:8}} >
+                    <Text>Ngày sinh</Text>
+                    <DatePicker               
+                        date={ngaysinh}
+                        mode="date"
+                        placeholder="Chọn ngày"
+                        format="DD-MM-YYYY"
+                        confirmBtnText="Xác nhận"
+                        cancelBtnText="Hủy"
+                        onDateChange={setNgaysinh}
+                        showIcon={false}
+                    />   
                 </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Họ tên:</Text>
-                    <Text style={styles.input}>{hovaten}</Text>
+                <View style={{flex:1}}>
+                    <Dropdown
+                        label='Nơi sinh'
+                        data={noiSinhData}
+                        value={noisinh}
+                        onChangeText={setNoisinh}
+                    /> 
                 </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Lớp:</Text>
-                    <Text style={styles.input}>{malop}</Text>
                 </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Tình trạng:</Text>
-                    <Text style={styles.input}>{tinhtranghoc}</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Ngày sinh:</Text>
-                    <TextInput style={styles.input} value={ngaysinh} onChangeText={setNgaysinh} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Nơi sinh:</Text>
-                    <TextInput style={styles.input} value={noisinh} onChangeText={setNoisinh} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Dân tộc:</Text>
-                    <TextInput style={styles.input} value={dantoc} onChangeText={setDantoc} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Tôn giáo:</Text>
-                    <TextInput style={styles.input} value={tongiao} onChangeText={setTongiao} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>EMail:</Text>
-                    <TextInput style={styles.input} value={email} onChangeText={setEmail} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>SĐT:</Text>
-                    <TextInput style={styles.input} value={sdt} onChangeText={setSdt} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>CMND:</Text>
-                    <TextInput style={styles.input} value={cmnd} onChangeText={setCmnd} />
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Địa chỉ:</Text>
-                    <TextInput style={styles.input} value={diachi} onChangeText={setDiachi} />
-                </View>
-                <Button title="Xác nhận" onPress={()=>postProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi})}/>
+                <TextInput        
+                    label='Tôn giáo'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={tongiao}
+                    onChangeText={setTongiao}
+                />     
+                <View style={{paddingHorizontal:16}}>
+                    <Dropdown
+                    label='Giới tính'
+                    data={gioiTinhData}
+                    value={gioitinh}
+                    onChangeText={setGioitinh}
+                    /> 
+                </View>  
+                <TextInput        
+                    label='Email'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={email}
+                    onChangeText={setEmail}
+                />         
+                <TextInput        
+                    label='Số điện thoại'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={sdt}
+                    onChangeText={setSdt}
+                />         
+                <TextInput        
+                    label='CMND'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={cmnd}
+                    onChangeText={setCmnd}
+                />         
+                <TextInput        
+                    label='Địa chỉ'
+                    mode='outlined'
+                    style={styles.textInput}
+                    value={diachi}
+                    onChangeText={setDiachi}
+                />
+                <Button title="Xác nhận" onPress={()=>postProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}/>
             </ScrollView>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    input: {
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'black',
-        padding: 5,
-        margin: 5,
-        flex:1,
-        marginBottom: 20,
-        marginRight: 20,
-        marginTop: 10
-    },
-    label: {
-        marginBottom: 5,
-        fontSize: 20,
-        marginLeft: 20,
-        width:120,
-        marginTop: 10
-    },
-    row: {
-        flexDirection: 'row'
+const styles = StyleSheet.create({    
+    textInput:{
+        margin:12       
     }
 });
 
