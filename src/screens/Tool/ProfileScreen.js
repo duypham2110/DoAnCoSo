@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Text, Button } from 'react-native-elements';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { Text,TextInput } from 'react-native-paper';
+import { View, StyleSheet, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Context as ProfileContext } from '../../context/ProfContext';
 import Spacer from '../../components/Spacers';
@@ -9,7 +9,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const ProfileScreen = ({navigation}) => {
-
 
     const { state, getProf } = useContext(ProfileContext);
     useEffect(() => {
@@ -21,55 +20,67 @@ const ProfileScreen = ({navigation}) => {
             listener.remove();
         }
     }, [])
-
+console.log(state);
     return (
         <View>
             <ScrollView>
-                    <InfomationItem 
-                        title={'MSSV'}
-                        content={state.mssv}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Họ và tên'}
-                        content={state.hovaten}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Lớp'}
-                        content={state.malop}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Tình trạng học'}
-                        content={state.tinhtranghoc}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Ngày sinh'}
-                        content={state.ngaysinh}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Nơi sinh'}
-                        content={state.noisinh}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Dân tộc'}
-                        content={state.dantoc}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Tôn giáo'}
-                        content={state.tongiao}
-                        disabled
-                    />
-                    <InfomationItem 
-                        title={'Giới tính'}
-                        content={state.gioitinh}
-                        disabled
-                    />
+                    <View style={styles.view}>
+                        <InfomationItem 
+                            title={'MSSV'}
+                            content={state.mssv}
+                            disabled
+                        />
+                        <InfomationItem 
+                            title={'Lớp'}
+                            content={state.malop}
+                            disabled
+                        />
+                        <InfomationItem 
+                            title={'Tình trạng'}
+                            content={state.tinhtranghoc}
+                            disabled
+                        />
+                    </View>  
+                    <View style={styles.view}>
+                        <TextInput        
+                          label='Họ và tên'
+                          disabled
+                          mode='outlined'
+                          value={state.hovaten}
+                          style={{padding:8,flex:3}}
+                        />
+                        <TextInput        
+                          label='Giới tính'
+                          disabled
+                          mode='outlined'
+                          value={state.gioitinh}
+                          style={{padding:8,flex:1}}
+                        />
+                    </View>                  
+                    <View style={styles.view}>
+                        <InfomationItem 
+                            title={'Ngày sinh'}
+                            content={state.ngaysinh}
+                            disabled
+                        />
+                        <InfomationItem 
+                            title={'Nơi sinh'}
+                            content={state.noisinh}
+                            disabled
+                        />
+                    </View>
+                    <View style={styles.view}>
+                        <InfomationItem 
+                            title={'Dân tộc'}
+                            content={state.dantoc}
+                            disabled
+                        />
+                        <InfomationItem 
+                            title={'Tôn giáo'}
+                            content={state.tongiao}
+                            disabled
+                        />
+                    </View>
                     <InfomationItem 
                         title={'Email'}
                         content={state.email}
@@ -130,6 +141,14 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row'
+    },
+    view:{
+        flex:1, 
+        flexDirection:'row'
+    },
+    textInput:{
+        flex:1,
+        padding:8       
     }
 });
 

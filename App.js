@@ -30,6 +30,7 @@ import ManagementScreen from './src/screens/ManagementScreen';
 import StatisticScreen from './src/screens/StatisticScreen';
 
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Provider as StatProvider } from './src/context/StatisticContext';
 import { Provider as NotificationProvider } from './src/context/NotificationContext';
 import { Provider as ProfProvider } from './src/context/ProfContext';
 import { setNavigator } from './src/navigationRef';
@@ -195,12 +196,14 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   
   return (
-    <AuthProvider>
-      <NotificationProvider>
-        <ProfProvider>
-          <App ref={(navigator) => { setNavigator(navigator) }} />
-        </ProfProvider>
-      </NotificationProvider>
-    </AuthProvider>
+    <StatProvider>
+      <AuthProvider>
+        <NotificationProvider>
+          <ProfProvider>
+            <App ref={(navigator) => { setNavigator(navigator) }} />
+          </ProfProvider>
+        </NotificationProvider>
+      </AuthProvider>
+    </StatProvider>
   )
 };

@@ -75,21 +75,15 @@ const UpdateProfileScreen = ({ navigation }) => {
 
     return (
         <View>            
-            <ScrollView >
+            <ScrollView >                      
+            <View style={styles.view}>
                 <TextInput        
                     label='MSSV'
                     mode='outlined'
                     style={styles.textInput}
                     value={mssv}
                     disabled
-                />      
-                <TextInput        
-                    label='Họ và tên'
-                    mode='outlined'
-                    style={styles.textInput}
-                    value={hovaten}
-                    disabled
-                />      
+                />    
                 <TextInput        
                     label='Lớp'
                     mode='outlined'
@@ -98,13 +92,30 @@ const UpdateProfileScreen = ({ navigation }) => {
                     disabled
                 />      
                 <TextInput        
-                    label='Tình trạng học'
+                    label='Tình trạng'
                     mode='outlined'
                     style={styles.textInput}
                     value={tinhtranghoc}
                     disabled
-                />      
-                <Divider />
+                />   
+            </View>
+                <View style={styles.view}>
+                    <TextInput        
+                        label='Họ và tên'
+                        mode='outlined'
+                        style={{padding:8,flex:3}}
+                        value={hovaten}
+                        disabled
+                    />
+                    <View style={{paddingHorizontal:16,flex:1}}>
+                        <Dropdown
+                        label='Giới tính'
+                        data={gioiTinhData}
+                        value={gioitinh}
+                        onChangeText={setGioitinh}
+                        /> 
+                    </View> 
+                </View>
                 <View
                     style={{flexDirection:'row',
                         justifyContent:'flex-start',
@@ -125,7 +136,7 @@ const UpdateProfileScreen = ({ navigation }) => {
                         showIcon={false}
                     />   
                 </View>
-                <View style={{flex:1}}>
+                <View style={{paddingHorizontal:16,flex:1}}>
                     <Dropdown
                         label='Nơi sinh'
                         data={noiSinhData}
@@ -140,15 +151,7 @@ const UpdateProfileScreen = ({ navigation }) => {
                     style={styles.textInput}
                     value={tongiao}
                     onChangeText={setTongiao}
-                />     
-                <View style={{paddingHorizontal:16}}>
-                    <Dropdown
-                    label='Giới tính'
-                    data={gioiTinhData}
-                    value={gioitinh}
-                    onChangeText={setGioitinh}
-                    /> 
-                </View>  
+                /> 
                 <TextInput        
                     label='Email'
                     mode='outlined'
@@ -185,7 +188,12 @@ const UpdateProfileScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({    
     textInput:{
-        margin:12       
+        padding:8,
+        flex:1      
+    },
+    view:{
+        flex:1, 
+        flexDirection:'row'
     }
 });
 
