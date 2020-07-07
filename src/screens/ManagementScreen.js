@@ -8,11 +8,11 @@ const data = [
       source: require('../images/taikhoan.png')
     }, 
     { 
-        key: 'Quản lý\nthông tin Sinh viên',
+        key: 'Thống kê theo mẫu',
         source: require('../images/sinhvien.png')
     }, 
     { 
-        key: 'Thống kê &\nKết xuất dữ liệu',
+        key: 'Thống kê \n theo trường thông tin ',
         source: require('../images/thongke.png'),
         navi:'Statistic'
     }
