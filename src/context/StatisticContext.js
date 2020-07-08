@@ -30,9 +30,9 @@ const getLop = (dispatch) => async (makhoa) => {
     })
 }
 
-const getData = (dispatch) => async (mssv, hovaten, malop, gioitinh) => {
+const getData = (dispatch) => async (mssv, hovaten, malop, gioitinh,tinhtrang,noisinh,dantoc,tongiao) => {
 
-    const response = await trackerApi.get(`/sinhvien?mssv=${mssv}&&hovaten=${hovaten}&&malop=${malop}&&gioitinh=${gioitinh}`)
+    const response = await trackerApi.get(`/sinhvien?mssv=${mssv}&&hovaten=${hovaten}&&malop=${malop}&&gioitinh=${gioitinh}&&tinhtrang=${tinhtrang}&&noisinh=${noisinh}&&dantoc=${dantoc}&&tongiao=${tongiao}`)
 
     dispatch({
         type: 'get_data',
@@ -42,8 +42,20 @@ const getData = (dispatch) => async (mssv, hovaten, malop, gioitinh) => {
     navigate('DataTable');
 }
 
+const searchSV = (dispatch) => async (mssv, hovaten) => {
+
+    const response = await trackerApi.get(`/sinhvien?mssv=${mssv}&&hovaten=${hovaten}`)
+
+    dispatch({
+        type: 'get_data',
+        payload: response.data
+    })
+
+    navigate('AccountTable');
+}
+
 export const { Provider, Context } = createDataContext(
     statReducer,
-    { getKhoa, getLop, getData },
+    { getKhoa, getLop, getData, searchSV },
     { lop: [], khoa: [], data: [] }
 );

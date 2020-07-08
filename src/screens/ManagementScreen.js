@@ -5,16 +5,13 @@ import { Card, ListItem, Button, Icon, Image } from 'react-native-elements'
 const data = [
     { 
       key: 'Quản lý tài khoản',
-      source: require('../images/taikhoan.png')
+      source: require('../images/taikhoan.png'),
+      navi:'AccManager'
     }, 
     { 
-        key: 'Thống kê theo mẫu',
-        source: require('../images/sinhvien.png')
-    }, 
-    { 
-        key: 'Thống kê \n theo trường thông tin ',
-        source: require('../images/thongke.png'),
-        navi:'Statistic'
+      key: 'Thống kê \n theo trường thông tin ',
+      source: require('../images/thongke.png'),
+      navi:'Statistic'
     }
 ];
 

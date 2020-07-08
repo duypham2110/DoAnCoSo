@@ -29,6 +29,10 @@ import UpdateProfileScreen from './src/screens/Tool/UpdateProfileScreen';
 import ManagementScreen from './src/screens/ManagementScreen';
 import StatisticScreen from './src/screens/StatisticScreen';
 import DataTableScreen from './src/screens/DataTableScreen';
+import AccManagerScreen from './src/screens/AccManagerScreen';
+import AccountTableScreen from './src/screens/AccountTableScreen';
+import SvProfileScreen from './src/screens/SvProfileScreen';
+import UpdateSvProfileScreen from './src/screens/UpdateSvProfileScreen';
 
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as StatProvider } from './src/context/StatisticContext';
@@ -148,6 +152,30 @@ const managementFlow= createStackNavigator({
     },
     DataTable: {
       screen:DataTableScreen,
+      navigationOptions: ({navigation}) => {
+        return { title: "Thống kê"}
+      }
+    },
+    AccManager: {
+      screen:AccManagerScreen,
+      navigationOptions: ({navigation}) => {
+        return { title: "Thống kê"}
+      }
+    },
+    AccountTable: {
+      screen:AccountTableScreen,
+      navigationOptions: ({navigation}) => {
+        return { title: "Thống kê"}
+      }
+    },
+    SvProfile: {
+      screen:SvProfileScreen,
+      navigationOptions: ({navigation}) => {
+        return { title: "Thống kê"}
+      }
+    },
+    UpdateSvProfile: {
+      screen:UpdateSvProfileScreen,
       navigationOptions: ({navigation}) => {
         return { title: "Thống kê"}
       }

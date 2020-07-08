@@ -21,6 +21,14 @@ const getProf = (dispatch) => {
     }
 }
 
+const searchSV = (dispatch) => async (mssv) => {
+
+    const response = await trackerApi.get(`/profile/${mssv}`)
+    dispatch({ type: 'get_profile', payload: response.data });
+
+    navigate('SvProfile');
+}
+
 const postProf = (dispatch) => async ({ mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi,gioitinh }) => {
     try {
         const response = await trackerApi.post(`/profile/${mssv}`, { mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi,gioitinh })
@@ -35,8 +43,26 @@ const postProf = (dispatch) => async ({ mssv, hovaten, malop, tinhtranghoc, ngay
     }
 }
 
+const postSvProf = (dispatch) => async ({ mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi,gioitinh }) => {
+    try {
+        const response = await trackerApi.post(`/profile/${mssv}`, { mssv, hovaten, malop, tinhtranghoc, ngaysinh, noisinh, dantoc, tongiao, email, sdt, cmnd, diachi,gioitinh })
+
+        const response2 = await trackerApi.get(`/profile/${mssv}`)
+        dispatch({ type: 'get_profile', payload: response2.data });
+    
+        navigate('SvProfile');
+        //dispatch({ type: 'resetpassword', payload: respone.data.msg })
+    }
+    catch (err) {
+        dispatch({
+            type: 'add_error',
+            payload: 'Something went wrong when reset password'
+        })
+    }
+}
+
 export const { Provider, Context } = createDataContext(
     profReducer,
-    { getProf, postProf },
+    { getProf, postProf, searchSV, postSvProf },
     { data: '', errorMessage: '' }
 );

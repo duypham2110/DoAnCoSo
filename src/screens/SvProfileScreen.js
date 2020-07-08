@@ -2,24 +2,16 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Text,TextInput, Button } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Context as ProfileContext } from '../../context/ProfContext';
-import Spacer from '../../components/Spacers';
-import InfomationItem from '../../components/InfomationItem';
+import { Context as ProfileContext } from '../context/ProfContext';
+import Spacer from '../components/Spacers';
+import InfomationItem from '../components/InfomationItem';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const ProfileScreen = ({navigation}) => {
+const SvProfileScreen = ({navigation}) => {
 
-    const { state, getProf } = useContext(ProfileContext);
-    useEffect(() => {
-        getProf();
-        const listener = navigation.addListener('didFocus', () => {
-            getProf();
-        })
-        return () => {
-            listener.remove();
-        }
-    }, [])
+    const { state } = useContext(ProfileContext);
+
     return (
         <View>
             <ScrollView>
@@ -101,9 +93,9 @@ const ProfileScreen = ({navigation}) => {
                         disabled
                     />
                 <Spacer>
-                    <Button  mode="contained" onPress={()=>navigation.navigate('UpdateProfile',{state})}>
-                        Cập nhật
-                    </Button>
+                <Button  mode="contained" onPress={()=>navigation.navigate('UpdateSvProfile',{state})}>
+                    Cập nhật
+                </Button>
                 </Spacer>
             </ScrollView>
         </View>
@@ -142,4 +134,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ProfileScreen; 
+export default SvProfileScreen; 

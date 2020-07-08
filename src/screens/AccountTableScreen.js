@@ -4,13 +4,13 @@ import { View, StyleSheet} from 'react-native';
 import Datatable from '../components/Datatable';
 import { Context as StatContext } from '../context/StatisticContext';
 
-const DataTableScreen = () => {
+
+const AccountTableScreen = () => {
 
     const {state} = useContext(StatContext);
-
+    
     return (
         <View style={styles.container}>
-            <Text>DataTableScreen</Text>
             <Datatable
                 header={[
                     {
@@ -24,33 +24,11 @@ const DataTableScreen = () => {
                     {
                         name: 'Lớp',
                         attr: 'malop',
-                    },
-                    {
-                        name: 'Giới tính',
-                        attr: 'gioitinh',
-                    },
-                    {
-                        name: 'Tình trạng',
-                        attr: 'tinhtranghoc',
-                    },
-                    {
-                        name: 'Nơi sinh',
-                        attr: 'noisinh',
-                    },
-                    {
-                        name: 'Dân tộc',
-                        attr: 'dantoc',
-                    },
-                    {
-                        name: 'Tôn giáo',
-                        attr: 'tongiao',
                     }
                 ]}
                 datatable={state.data}
-                //page={page}
-                //perPage={4}
+                Touchable={true}
                 style={styles.table}
-                Touchable={false}
             />
         </View>
     )
@@ -70,4 +48,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DataTableScreen; 
+export default AccountTableScreen; 

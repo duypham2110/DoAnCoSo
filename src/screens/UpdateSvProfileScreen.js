@@ -3,20 +3,20 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Text, Button } from 'react-native-elements';
 import { View, StyleSheet } from 'react-native';
 import { TextInput,Divider} from 'react-native-paper';
-import { Context as ProfileContext } from '../../context/ProfContext';
+import { Context as ProfileContext } from '../context/ProfContext';
 import { Dropdown } from 'react-native-material-dropdown';
-import DatePicker from 'react-native-datepicker'
-import Spacer from '../../components/Spacers';
+import DatePicker from 'react-native-datepicker';
+import Spacer from '../components/Spacers';
 
-const UpdateProfileScreen = ({ navigation }) => {   
+const UpdateSvProfileScreen = ({ navigation }) => {   
     
-    const {postProf } = useContext(ProfileContext);
+    const {postSvProf } = useContext(ProfileContext);
     
     const state = navigation.getParam('state');
 
     const [mssv, setMssv] = useState(state.mssv);
     const [hovaten, setHovaten] = useState(state.hovaten);
-    const [malop, setLop] = useState(state.malop);
+    const [malop, setMalop] = useState(state.malop);
     const [tinhtranghoc, setTinhtranghoc] = useState(state.tinhtranghoc);
     const [ngaysinh, setNgaysinh] = useState(state.ngaysinh);
     const [noisinh, setNoisinh] = useState(state.noisinh);
@@ -90,14 +90,14 @@ const UpdateProfileScreen = ({ navigation }) => {
                     mode='outlined'
                     style={styles.textInput}
                     value={malop}
-                    disabled
+                    onChangeText={setMalop}
                 />      
                 <TextInput        
                     label='Tình trạng'
                     mode='outlined'
                     style={styles.textInput}
                     value={tinhtranghoc}
-                    disabled
+                    onChangeText={setTinhtranghoc}
                 />   
             </View>
                 <View style={styles.view}>
@@ -106,7 +106,7 @@ const UpdateProfileScreen = ({ navigation }) => {
                         mode='outlined'
                         style={{padding:8,flex:3}}
                         value={hovaten}
-                        disabled
+                        onChangeText={setHovaten}
                     />
                     <View style={{paddingHorizontal:16,flex:1}}>
                         <Dropdown
@@ -182,7 +182,7 @@ const UpdateProfileScreen = ({ navigation }) => {
                     onChangeText={setDiachi}
                 />
                 <Spacer>
-                    <Button title="Xác nhận" onPress={()=>postProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}/>
+                    <Button title="Xác nhận" onPress={()=>postSvProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}/>
                 </Spacer>
             </ScrollView>
         </View>
@@ -200,4 +200,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default UpdateProfileScreen; 
+export default UpdateSvProfileScreen; 
