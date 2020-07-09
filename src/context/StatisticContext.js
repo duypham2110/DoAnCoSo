@@ -10,7 +10,9 @@ const statReducer = (state, action) => {
         case 'get_lop':
             return { ...state, lop: action.payload };
         case 'get_data':
-            return { ...state, data: action.payload };
+            return { ...state, data: action.payload, query:action.query };
+        case 'get_csv':
+            return { ...state, csv: action.payload };
 
     }
 }
@@ -18,6 +20,7 @@ const statReducer = (state, action) => {
 const getKhoa = (dispatch) => {
     return async () => {
         const response = await trackerApi.get(`/khoa`)
+        console.log(response.data);
         dispatch({ type: 'get_khoa', payload: response.data });
     }
 }
@@ -36,8 +39,12 @@ const getData = (dispatch) => async (mssv, hovaten, malop, gioitinh,tinhtrang,no
 
     dispatch({
         type: 'get_data',
-        payload: response.data
+        payload: response.data,
+        query:{mssv, hovaten, malop, gioitinh,tinhtrang,noisinh,dantoc,tongiao}
     })
+
+    let dulieu;
+    dulieu=malop;
 
     navigate('DataTable');
 }
@@ -54,8 +61,19 @@ const searchSV = (dispatch) => async (mssv, hovaten) => {
     navigate('AccountTable');
 }
 
+const getCSV = (dispatch) => async (mssv, hovaten) => {
+
+    const response = await trackerApi.get(`/csv`)
+    console.log(response.data)
+    dispatch({
+        type: 'get_csv',
+        payload: response.data
+    })
+
+}
+
 export const { Provider, Context } = createDataContext(
     statReducer,
-    { getKhoa, getLop, getData, searchSV },
-    { lop: [], khoa: [], data: [] }
+    { getKhoa, getLop, getData, searchSV, getCSV },
+    { lop: [], khoa: [], data: [],query:[] }
 );

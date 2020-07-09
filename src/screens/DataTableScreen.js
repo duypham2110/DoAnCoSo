@@ -1,16 +1,19 @@
 import React, { useContext } from 'react';
 import { Text } from 'react-native-elements';
-import { View, StyleSheet} from 'react-native';
+import { Button } from 'react-native-paper';
+import { View, StyleSheet,Linking} from 'react-native';
 import Datatable from '../components/Datatable';
 import { Context as StatContext } from '../context/StatisticContext';
 
 const DataTableScreen = () => {
 
-    const {state} = useContext(StatContext);
+    const {state,getCSV} = useContext(StatContext);
 
     return (
-        <View style={styles.container}>
-            <Text>DataTableScreen</Text>
+        <View style={styles.container}>            
+            <Button  mode="contained" onPress={ ()=>{ Linking.openURL(`http://animated-spot-glade.glitch.me/csv?mssv=${state.query.mssv}&&hovaten=${state.query.hovaten}&&malop=${state.query.malop}&&gioitinh=${state.query.gioitinh}&&tinhtrang=${state.query.tinhtrang}&&noisinh=${state.query.noisinh}&&dantoc=${state.query.dantoc}&&tongiao=${state.query.tongiao}`)}}>
+                    Kết xuất
+                </Button>
             <Datatable
                 header={[
                     {
