@@ -2,31 +2,43 @@ import React, { useState, useContext, useEffect, useReducer } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, Button } from 'react-native-elements';
 import { View, StyleSheet } from 'react-native';
-import { TextInput,Divider} from 'react-native-paper';
+import { TextInput,HelperText} from 'react-native-paper';
 import { Context as ProfileContext } from '../context/ProfContext';
 import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker';
 import Spacer from '../components/Spacers';
+import { Context as StatContext } from '../context/StatisticContext';
 
 const UpdateSvProfileScreen = ({ navigation }) => {   
     
+    const {getLop, state} = useContext(StatContext);
     const {postSvProf } = useContext(ProfileContext);
     
-    const state = navigation.getParam('state');
+    const data = navigation.getParam('state');
 
-    const [mssv, setMssv] = useState(state.mssv);
-    const [hovaten, setHovaten] = useState(state.hovaten);
-    const [malop, setMalop] = useState(state.malop);
-    const [tinhtranghoc, setTinhtranghoc] = useState(state.tinhtranghoc);
-    const [ngaysinh, setNgaysinh] = useState(state.ngaysinh);
-    const [noisinh, setNoisinh] = useState(state.noisinh);
-    const [dantoc, setDantoc] = useState(state.dantoc);
-    const [tongiao, setTongiao] = useState(state.tongiao);
-    const [email, setEmail] = useState(state.email);
-    const [sdt, setSdt] = useState(state.sdt);
-    const [cmnd, setCmnd] = useState(state.cmnd);
-    const [diachi, setDiachi] = useState(state.diachi);
-    const [gioitinh, setGioitinh] = useState(state.gioitinh);
+    useEffect(() => {
+        getLop('');
+        const listener = navigation.addListener('didFocus', () => {
+            getLop('');
+        })
+        return () => {
+            listener.remove();
+        }
+    }, [])
+
+    const [mssv, setMssv] = useState(data.mssv);
+    const [hovaten, setHovaten] = useState(data.hovaten);
+    const [malop, setMaLop] = useState(data.malop);
+    const [tinhtranghoc, setTinhtranghoc] = useState(data.tinhtranghoc);
+    const [ngaysinh, setNgaysinh] = useState(data.ngaysinh);
+    const [noisinh, setNoisinh] = useState(data.noisinh);
+    const [dantoc, setDantoc] = useState(data.dantoc);
+    const [tongiao, setTongiao] = useState(data.tongiao);
+    const [email, setEmail] = useState(data.email);
+    const [sdt, setSdt] = useState(data.sdt);
+    const [cmnd, setCmnd] = useState(data.cmnd);
+    const [diachi, setDiachi] = useState(data.diachi);
+    const [gioitinh, setGioitinh] = useState(data.gioitinh);
 
     let gioiTinhData = [{
         value: 'Nam',
@@ -35,6 +47,31 @@ const UpdateSvProfileScreen = ({ navigation }) => {
       }, {
         value: 'Khác',
       }];
+
+    let tinhtrangData = [{
+        value: 'Còn học',
+    }, {
+        value: 'Đã Nghỉ',
+    }, {
+        value: 'Bảo Lưu',
+    }];
+
+    let dantocData = [{
+        value: 'Kinh',
+    },{
+        value: 'Khác',
+    }];
+
+
+    let tongiaoData = [{
+        value: 'Phật Giáo',
+    }, {
+        value: 'Công Giáo',
+    }, {
+        value: 'Khác',
+    }, {
+        value: 'Không',
+    }];
 
     let noiSinhData = [{
         value: 'Lâm Đồng',
@@ -74,6 +111,19 @@ const UpdateSvProfileScreen = ({ navigation }) => {
         value: ' Đắk Nông',
     }];
 
+    console.log(sdt.length)
+
+    const hasSdtErrors = () => {
+        return (sdt.length!=10);
+      };
+    const hasCmndErrors = () => {
+        return (cmnd.length!=12);
+    };
+    const hasEmailErrors = () => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return !re.test(String(email).toLowerCase());
+    };
+
     return (
         <View>            
             <ScrollView >                      
@@ -84,21 +134,27 @@ const UpdateSvProfileScreen = ({ navigation }) => {
                     style={styles.textInput}
                     value={mssv}
                     disabled
-                />    
-                <TextInput        
-                    label='Lớp'
-                    mode='outlined'
-                    style={styles.textInput}
-                    value={malop}
-                    onChangeText={setMalop}
-                />      
-                <TextInput        
-                    label='Tình trạng'
-                    mode='outlined'
-                    style={styles.textInput}
-                    value={tinhtranghoc}
-                    onChangeText={setTinhtranghoc}
-                />   
+                />
+                <View style={{flex:1,paddingHorizontal:5}}>
+                    <Dropdown
+                        label='Lớp'
+                        data={state.lop}
+                        onChangeText={(text) => {
+                            setMaLop(text);
+                        }}
+                        value={malop}
+                    />
+                </View>
+                <View style={{flex:1,paddingHorizontal:5}}>
+                    <Dropdown
+                        label='Tình trạng học'
+                        data={tinhtrangData}
+                        onChangeText={(text) => {
+                            setTinhtranghoc(text);
+                        }}
+                        value={tinhtranghoc}
+                    />
+                </View>
             </View>
                 <View style={styles.view}>
                     <TextInput        
@@ -146,34 +202,68 @@ const UpdateSvProfileScreen = ({ navigation }) => {
                     /> 
                 </View>
                 </View>
-                <TextInput        
-                    label='Tôn giáo'
-                    mode='outlined'
-                    style={styles.textInput}
-                    value={tongiao}
-                    onChangeText={setTongiao}
-                /> 
-                <TextInput        
-                    label='Email'
-                    mode='outlined'
-                    style={styles.textInput}
-                    value={email}
-                    onChangeText={setEmail}
-                />         
+                <View
+                    style={{flexDirection:'row',
+                        justifyContent:'flex-start'}}>
+                    <View style={{flex:1,paddingHorizontal:12}}>
+                        <Dropdown
+                            label='Dân tộc'
+                            data={dantocData}
+                            onChangeText={(text) => {
+                                setDantoc(text);
+                            }}
+                            value={dantoc}
+                        />
+                    </View>
+                    <View style={{flex:1,paddingHorizontal:12}}>
+                        <Dropdown
+                        label='Tôn giáo'
+                            data={tongiaoData}
+                            onChangeText={(text) => {
+                                setTongiao(text);
+                            }}
+                            value={tongiao}
+                        />
+                    </View>
+                </View>
+                <View>
+                    <TextInput        
+                        label='Email'
+                        mode='outlined'
+                        style={styles.textInput}
+                        value={email}
+                        onChangeText={setEmail}
+                    />          
+                    <HelperText type="error" visible={hasEmailErrors()}>
+                        Email không hợp lệ
+                    </HelperText>   
+                </View>
+                <View>   
                 <TextInput        
                     label='Số điện thoại'
                     mode='outlined'
                     style={styles.textInput}
                     value={sdt}
                     onChangeText={setSdt}
+                    keyboardType = 'numeric'
                 />         
+                <HelperText type="error" visible={hasSdtErrors()}>
+                    Số điện thoại phải gồm 10 số
+                </HelperText>
+                </View>  
+                <View>
                 <TextInput        
                     label='CMND'
                     mode='outlined'
                     style={styles.textInput}
                     value={cmnd}
                     onChangeText={setCmnd}
-                />         
+                    keyboardType = 'numeric'
+                />          
+                <HelperText type="error" visible={hasCmndErrors()}>
+                    CMND gồm 12 số
+                </HelperText>
+                </View>         
                 <TextInput        
                     label='Địa chỉ'
                     mode='outlined'
@@ -182,7 +272,16 @@ const UpdateSvProfileScreen = ({ navigation }) => {
                     onChangeText={setDiachi}
                 />
                 <Spacer>
-                    <Button title="Xác nhận" onPress={()=>postSvProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}/>
+                    {(hasSdtErrors()||hasCmndErrors()||hasEmailErrors())?
+                    <Button 
+                        title="Xác nhận" 
+                        onPress={()=>postSvProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}
+                        disabled={true}
+                    />:
+                    <Button 
+                        title="Xác nhận" 
+                        onPress={()=>postSvProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}
+                    />}
                 </Spacer>
             </ScrollView>
         </View>

@@ -26,6 +26,7 @@ const getKhoa = (dispatch) => {
 }
 
 const getLop = (dispatch) => async (makhoa) => {
+    console.log('getlop')
     const response = await trackerApi.get(`/lop?makhoa=${makhoa}`)
     dispatch({
         type: 'get_lop',
@@ -35,7 +36,7 @@ const getLop = (dispatch) => async (makhoa) => {
 
 const getData = (dispatch) => async (mssv, hovaten, malop, gioitinh,tinhtrang,noisinh,dantoc,tongiao) => {
 
-    const response = await trackerApi.get(`/sinhvien?mssv=${mssv}&&hovaten=${hovaten}&&malop=${malop}&&gioitinh=${gioitinh}&&tinhtrang=${tinhtrang}&&noisinh=${noisinh}&&dantoc=${dantoc}&&tongiao=${tongiao}`)
+    const response = await trackerApi.get(`/sinhvien?mssv=${mssv}&&hovaten=${hovaten}&&malop=${malop}&&gioitinh=${gioitinh}&&tinhtranghoc=${tinhtrang}&&noisinh=${noisinh}&&dantoc=${dantoc}&&tongiao=${tongiao}`)
 
     dispatch({
         type: 'get_data',

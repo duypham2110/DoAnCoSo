@@ -15,10 +15,6 @@ const ShowNotificationScreen = ({ navigation }) => {
         <Text style={styles.title}>{blogPost.title}</Text>
         <View style={{ flex: 1, backgroundColor: 'white'}}>
             <Text style={styles.content}>{blogPost.content}</Text>
-            <Image
-                source={{ uri: 'http://tuyensinh.dlu.edu.vn/Temp/ArticleImage/fadea810-5788-486c-b3d6-b4b617b7934d.jpg' }}
-                style={styles.image}
-            />
         </View>
     </View>
 }

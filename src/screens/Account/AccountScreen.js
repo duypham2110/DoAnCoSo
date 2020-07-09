@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Text, Button } from 'react-native-elements';
-import { View, StyleSheet } from 'react-native';
+import { Text, Button, ListItem,Divider } from 'react-native-elements';
+import { View, StyleSheet,Linking } from 'react-native';
 import { Context as AuthContext } from '../../context/AuthContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Spacer from '../../components/Spacers';
@@ -12,57 +12,25 @@ const AccountScreen = ({ navigation }) => {
 
     return (
         <View>
-            <Spacer>
-                <Button
-                    icon={
-                        <Icon
-                            name="info-circle"
-                            size={20}
-                            color="white"
-                            style={{ padding: 10 }}
-                        />
-                    }
+                <ListItem
                     title='Thông tin'
+                    onPress={ ()=>{ Linking.openURL(`http://animated-spot-glade.glitch.me/thongtin`)}}
                 />
-                <Spacer/>
-                <Button
-                    icon={
-                        <Icon
-                            name="question-circle"
-                            size={20}
-                            color="white"
-                            style={{ padding: 10 }}
-                        />
-                    }
+                <Divider style={{ backgroundColor: '#e1e8ee' }} />
+                <ListItem
                     title='Trợ giúp'
-                />                
-                <Spacer/>
-                <Button 
-                    icon={
-                        <Icon
-                            name="retweet"
-                            size={20}
-                            color="white"
-                            style={{ padding: 10 }}
-                        />
-                    }
-                    title='Đặt lại mật khẩu' 
+                    onPress={ ()=>{ Linking.openURL(`http://animated-spot-glade.glitch.me/trogiup`)}}
+                />
+                <Divider style={{ backgroundColor: '#e1e8ee' }} />
+                <ListItem
+                    title='Đặt lại mật khẩu'
                     onPress={() => navigation.navigate('ResetPassword')} 
                 />
-                <Spacer/>
-                <Button 
-                    icon={
-                        <Icon
-                            name="sign-out"
-                            size={20}
-                            color="white"
-                            style={{ padding: 10 }}
-                        />
-                    }
-                    title='Đăng xuất' 
+                <Divider style={{ backgroundColor: '#e1e8ee' }} />
+                <ListItem
+                    title='Đăng xuất'
                     onPress={signout} 
                 />
-            </Spacer>
         </View>
     )
 }

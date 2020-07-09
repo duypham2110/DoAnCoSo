@@ -19,6 +19,7 @@ const AccManagerScreen = ({ navigation }) => {
                 mode='outlined'
                 value={mssv}
                 onChangeText={setMssv}
+                keyboardType = 'numeric'
             />
             <TextInput
                 label='Họ và tên'

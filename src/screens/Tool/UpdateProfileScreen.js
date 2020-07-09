@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect, useReducer } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, Button } from 'react-native-elements';
 import { View, StyleSheet } from 'react-native';
-import { TextInput,Divider} from 'react-native-paper';
+import { TextInput,HelperText} from 'react-native-paper';
 import { Context as ProfileContext } from '../../context/ProfContext';
 import { Dropdown } from 'react-native-material-dropdown';
 import DatePicker from 'react-native-datepicker'
@@ -35,6 +35,23 @@ const UpdateProfileScreen = ({ navigation }) => {
       }, {
         value: 'Khác',
       }];
+
+      let dantocData = [{
+        value: 'Kinh',
+    },{
+        value: 'Khác',
+    }];
+
+
+    let tongiaoData = [{
+        value: 'Phật Giáo',
+    }, {
+        value: 'Công Giáo',
+    }, {
+        value: 'Khác',
+    }, {
+        value: 'Không',
+    }];
 
     let noiSinhData = [{
         value: 'Lâm Đồng',
@@ -73,6 +90,18 @@ const UpdateProfileScreen = ({ navigation }) => {
     }, {
         value: ' Đắk Nông',
     }];
+
+
+    const hasSdtErrors = () => {
+        return (sdt.length!=10);
+      };
+    const hasCmndErrors = () => {
+        return (cmnd.length!=12);
+    };
+    const hasEmailErrors = () => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return !re.test(String(email).toLowerCase());
+    };
 
     return (
         <View>            
@@ -146,34 +175,56 @@ const UpdateProfileScreen = ({ navigation }) => {
                     /> 
                 </View>
                 </View>
-                <TextInput        
-                    label='Tôn giáo'
-                    mode='outlined'
-                    style={styles.textInput}
-                    value={tongiao}
-                    onChangeText={setTongiao}
-                /> 
-                <TextInput        
-                    label='Email'
-                    mode='outlined'
-                    style={styles.textInput}
-                    value={email}
-                    onChangeText={setEmail}
-                />         
+                <View
+                    style={{flexDirection:'row',
+                        justifyContent:'flex-start'}}>
+                    <View style={{flex:1,paddingHorizontal:12}}>
+                        <Dropdown
+                            label='Dân tộc'
+                            data={dantocData}
+                            onChangeText={(text) => {
+                                setDantoc(text);
+                            }}
+                            value={dantoc}
+                        />
+                    </View>
+                    <View style={{flex:1,paddingHorizontal:12}}>
+                        <Dropdown
+                        label='Tôn giáo'
+                            data={tongiaoData}
+                            onChangeText={(text) => {
+                                setTongiao(text);
+                            }}
+                            value={tongiao}
+                        />
+                    </View>
+                </View>
+                <View>   
                 <TextInput        
                     label='Số điện thoại'
                     mode='outlined'
                     style={styles.textInput}
                     value={sdt}
                     onChangeText={setSdt}
+                    keyboardType = 'numeric'
                 />         
+                <HelperText type="error" visible={hasSdtErrors()}>
+                    Số điện thoại phải gồm 10 số
+                </HelperText>
+                </View>  
+                <View>
                 <TextInput        
                     label='CMND'
                     mode='outlined'
                     style={styles.textInput}
                     value={cmnd}
                     onChangeText={setCmnd}
-                />         
+                    keyboardType = 'numeric'
+                />          
+                <HelperText type="error" visible={hasCmndErrors()}>
+                    CMND gồm 12 số
+                </HelperText>
+                </View>         
                 <TextInput        
                     label='Địa chỉ'
                     mode='outlined'
@@ -182,7 +233,16 @@ const UpdateProfileScreen = ({ navigation }) => {
                     onChangeText={setDiachi}
                 />
                 <Spacer>
-                    <Button title="Xác nhận" onPress={()=>postProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}/>
+                    {(hasSdtErrors()||hasCmndErrors()||hasEmailErrors())?
+                    <Button 
+                        title="Xác nhận" 
+                        onPress={()=>postProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}
+                        disabled={true}
+                    />:
+                    <Button 
+                        title="Xác nhận" 
+                        onPress={()=>postProf({mssv,hovaten,malop,tinhtranghoc,ngaysinh,noisinh,dantoc,tongiao,email,sdt,cmnd,diachi,gioitinh})}
+                    />}
                 </Spacer>
             </ScrollView>
         </View>

@@ -153,31 +153,31 @@ const managementFlow= createStackNavigator({
     DataTable: {
       screen:DataTableScreen,
       navigationOptions: ({navigation}) => {
-        return { title: "Thống kê"}
+        return { title: "Danh sách sinh viên"}
       }
     },
     AccManager: {
       screen:AccManagerScreen,
       navigationOptions: ({navigation}) => {
-        return { title: "Thống kê"}
+        return { title: "Tìm kiếm sinh viên"}
       }
     },
     AccountTable: {
       screen:AccountTableScreen,
       navigationOptions: ({navigation}) => {
-        return { title: "Thống kê"}
+        return { title: "Danh sách sinh viên"}
       }
     },
     SvProfile: {
       screen:SvProfileScreen,
       navigationOptions: ({navigation}) => {
-        return { title: "Thống kê"}
+        return { title: "Thông tin sinh viên"}
       }
     },
     UpdateSvProfile: {
       screen:UpdateSvProfileScreen,
       navigationOptions: ({navigation}) => {
-        return { title: "Thống kê"}
+        return { title: "Cập nhật thông tin sinh viên"}
       }
     }
 })

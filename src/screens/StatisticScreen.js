@@ -111,9 +111,9 @@ const StatisticScreen = ({ navigation }) => {
         }, {
           value: 'Còn học'
         }, {
-          value: 'Đã nghỉ'
+          value: 'Đã Nghỉ'
         }, {
-          value: 'Bảo lưu'
+          value: 'Bảo Lưu'
         }];
 
       let thongkeData = [{
@@ -152,7 +152,20 @@ const StatisticScreen = ({ navigation }) => {
                 <Dropdown
                     label='Loại thống kê'
                     data={thongkeData}
-                    onChangeText={setLoai}
+                    onChangeText={(text) => {
+                        setLoai(text);         
+                        setMssv('')
+                        setHovaten('')
+                        setGioitinh('')
+                        setMaLop('')
+                        setMakhoa('')
+                        setDantoc('')
+                        setNoisinh('')
+                        setTieude('')
+                        setTongiao('')
+                        setTinhtrang('')
+                    }}
+                    value={loai}
                 />
                 {
                 loai=='Tùy chọn'?
