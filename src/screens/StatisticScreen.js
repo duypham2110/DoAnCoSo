@@ -58,11 +58,93 @@ const StatisticScreen = ({ navigation }) => {
         value: 'Đắk Lắk',
     }, {
         value: ' Đắk Nông',
+    }, {
+        value: 'Điện Biên',
+    }, {
+        value: 'Đồng Tháp',
+    }, {
+        value: 'Đồng Nai',
+    }, {
+        value: 'Gia Lai',
+    }, {
+        value: 'Hà Giang',
+    }, {
+        value: 'Hà Nội (TP)',
+    }, {
+        value: 'Hà Tây',
+    }, {
+        value: 'Hà Tĩnh',
+    }, {
+        value: 'Hải Phòng (TP)',
+    }, {
+        value: 'Hòa Bình',
+    }, {
+        value: 'Hồ Chí Minh (TP)',
+    }, {
+        value: 'Hậu Giang',
+    }, {
+        value: 'Hưng Yên',
+    }, {
+        value: 'Khánh Hòa',
+    }, {
+        value: 'Kiên Giang',
+    }, {
+        value: 'Kon Tum',
+    }, {
+        value: 'Lai Châu',
+    }, {
+        value: 'Lào Cai',
+    }, {
+        value: 'Lạng Sơn',
+    }, {
+        value: 'Long An',
+    }, {
+        value: 'Nam Định',
+    }, {
+        value: 'Ninh Bình',
+    }, {
+        value: 'Ninh Thuận',
+    }, {
+        value: 'Phú Thọ',
+    }, {
+        value: 'Phú Yên',
+    }, {
+        value: 'Quảng Bình',
+    }, {
+        value: 'Quảng Nam',
+    }, {
+        value: 'Quảng Ngãi',
+    }, {
+        value: 'Quảng Ninh',
+    }, {
+        value: 'Quảng Trị',
+    }, {
+        value: 'Sóc Trăng',
+    }, {
+        value: 'Sơn La',
+    }, {
+        value: 'Tây Ninh',
+    }, {
+        value: 'Thái Bình',
+    }, {
+        value: 'Thái Nguyên',
+    }, {
+        value: 'Thanh Hóa',
+    }, {
+        value: 'Thừa Thiên – Huế',
+    }, {
+        value: 'Tiền Giang',
+    }, {
+        value: 'Tuyên Quang',
+    }, {
+        value: 'Vĩnh Long',
+    }, {
+        value: 'Vĩnh Phúc',
+    }, {
+        value: 'Yên Bái',
     }];
 
     let gioiTinhData = [{
-        value: 'Tất cả'
-      }, {
         value: 'Nam'
       }, {
         value: 'Nữ'
@@ -71,44 +153,21 @@ const StatisticScreen = ({ navigation }) => {
       }];
 
     let tongiaoData = [{
-        value: 'Tất cả'
-    }, {
         value: 'Phật Giáo'
     }, {
         value: 'Công Giáo'
-    }, {
-        value: 'Tin Lành'
-    }, {
-        value: 'Cao Đài'
-    }, {
-        value: 'Cao Đài'
+    }, {  value: 'Không'
     }, {
         value: 'Khác'
     }];
 
       let dantocData = [{
-          value: 'Tất cả'
-        }, {
           value: 'Kinh'
-        }, {
-          value: 'Dân tộc ít người'
-        }, {
-          value: 'Tày'
-        }, {
-          value: 'Thái'
-        }, {
-          value: 'Mường'
-        }, {
-          value: 'Khmer'
-        }, {
-          value: 'Hoa'
         }, {
           value: 'Khác'
         }];
 
-      let tinhtrangData = [{
-          value: 'Tất cả'
-        }, {
+      let tinhtrangData = [ {
           value: 'Còn học'
         }, {
           value: 'Đã Nghỉ'

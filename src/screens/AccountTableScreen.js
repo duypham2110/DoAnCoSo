@@ -10,26 +10,32 @@ const AccountTableScreen = () => {
     const {state} = useContext(StatContext);
     
     return (
-        <View style={styles.container}>
-            <Datatable
-                header={[
-                    {
-                        name: 'MSSV',
-                        attr: 'mssv',
-                    },
-                    {
-                        name: 'Họ và tên',
-                        attr: 'hovaten',
-                    },
-                    {
-                        name: 'Lớp',
-                        attr: 'malop',
-                    }
-                ]}
-                datatable={state.data}
-                Touchable={true}
-                style={styles.table}
-            />
+        <View 
+        style={{flex:1,backgroundColor:'white',
+        alignItems:'center',margin:8}}>
+            <View
+                style={{flex:1}}
+                >
+                <Datatable
+                    header={[
+                        {
+                            name: 'MSSV',
+                            attr: 'mssv',
+                        },
+                        {
+                            name: 'Họ và tên',
+                            attr: 'hovaten',
+                        },
+                        {
+                            name: 'Lớp',
+                            attr: 'malop',
+                        }
+                    ]}
+                    datatable={state.data}
+                    Touchable={true}
+                    style={styles.table}
+                />
+            </View>
         </View>
     )
 }
@@ -37,12 +43,14 @@ const AccountTableScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         backgroundColor: '#ecf0f1',
-        padding: 8
+        alignItems:'center'
     },
     table: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        flex:1,
+        marginVertical:8,
+        padding:8
     },
     scrollView: {
     },
